@@ -1,7 +1,9 @@
 # GemBrancher 🌿  
 **Branch Your Gemini Conversations with Full Context**
 
-GemBrancher is a powerful Chrome Extension that adds "Git-like" branching to Google Gemini. Ever wanted to take a conversation in a different direction without losing the context of what you've already discussed? Now you can.
+GemBrancher is a simple, effective Chrome Extension that adds "Git-like" branching to Google Gemini. 
+
+**Note**: This is a "dumb" solution to a complex problem. Gemini doesn't officially support branching, so this extension brute-forces it by scraping your current DOM, dumping it into a JSON file, and feeding it back to a new chat instance. It's not magic—it's just automating the Copy/Paste/Context-loading workflow you'd do manually.
 
 ![GemBrancher Banner](icons/gembrancher%20icon.png)
 
