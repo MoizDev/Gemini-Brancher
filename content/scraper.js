@@ -150,12 +150,12 @@ window.GeminiScraper.hydrateChat = async (onProgress) => {
             // First few iterations use longer wait to give network time to start
             // After that, use adaptive wait based on loading state
             let waitTime;
-            if (totalScrolls <= 1) {
-                waitTime = 600; // Give network time to respond initially
+            if (totalScrolls <= 2) {
+                waitTime = 800; // Give network solid time to respond initially
             } else if (isActivelyLoading) {
-                waitTime = 600; // Actively loading - check reasonably often
+                waitTime = 800; // Actively loading - wait a bit to catch batches
             } else {
-                waitTime = 300; // Seems stable - check quickly
+                waitTime = 300; // No activity - check fast
             }
             await sleep(waitTime);
 
@@ -177,9 +177,9 @@ window.GeminiScraper.hydrateChat = async (onProgress) => {
                 attemptsNoChange++;
 
                 // Adaptive exit:
-                // If we never loaded anything (small chat), exit quickly (2 checks)
-                // If we did load something (large chat), verify a bit more (3 checks)
-                const requiredNoChange = hasLoadedAny ? 3 : 2;
+                // If we loaded something (active), valid exit requires 5 checks (be sure)
+                // If we haven't loaded anything yet, valid exit requires 4 checks (don't give up too fast)
+                const requiredNoChange = hasLoadedAny ? 5 : 4;
 
                 if (scroller.scrollTop === 0 && attemptsNoChange >= requiredNoChange) {
                     break;
